@@ -5,10 +5,8 @@ from .database import SessionLocal, engine
 
 app = FastAPI()
 
-# Crearea tabelelor (dacă nu au fost create deja)
 models.Base.metadata.create_all(bind=engine)
 
-# Funcție pentru a obține o sesiune de bază de date
 def get_db():
     db = SessionLocal()
     try:

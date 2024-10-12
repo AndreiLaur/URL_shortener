@@ -1,7 +1,5 @@
 from pydantic import BaseModel, Field
 
-
-
 class UserCreate(BaseModel):
     id: int
     name: str
