@@ -17,3 +17,4 @@ class URLCreate(BaseModel):
 
     class Config:
         orm_mode = True
+

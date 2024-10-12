@@ -28,3 +28,4 @@ def delete_url(db: Session, short_url: str):
         db.commit()
     return db_url
 
+
