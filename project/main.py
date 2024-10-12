@@ -32,3 +32,5 @@ def read_urls(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 def delete_url(short_url: str, db: Session = Depends(get_db)):
     url = crud.delete_url(db=db, short_url=short_url)
     return url
+
+
