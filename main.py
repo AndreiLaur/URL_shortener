@@ -91,3 +91,20 @@ def get_long_url(short_link: str, credentials: HTTPBasicCredentials = Depends(se
         raise HTTPException(status_code=404, detail="No URL found for short link or not owned by user.")
     return long_url_entry.long_url
 
+
+from fastapi.responses import RedirectResponse
+
+
+@app.get("/{short_url_after_IP}", response_class=RedirectResponse)
+def redirect_to_long_url(short_url_after_IP: str, db: Session = Depends(get_db)):
+    """Redirect the short URL to the corresponding long URL."""
+    # Fetch the long URL associated with the short URL
+    long_url_entry = crud.get_url_by_short(db, short_url_after_IP)
+
+    # If the short URL doesn't exist, return a 404 error
+    if long_url_entry is None:
+        raise HTTPException(status_code=404, detail="URL not found.")
+
+    # Redirect to the long URL
+    return RedirectResponse(url=long_url_entry.long_url)
+
